@@ -22,15 +22,23 @@ jobs:
       # Test for hw_copy
       - name: Build and Run hw_copy
         run: |
-          echo "=== Testing hw_copy ==="
+          echo "=== Testing hw_copy ===" > result.txt
           cd hw_copy
-          ./run.sh
+          ./run.sh >> ../result.txt
           cd ..
 
       # Test for hw_vol
       - name: Build and Run hw_vol
         run: |
-          echo "=== Testing hw_vol ==="
+          echo "=== Testing hw_vol ===" >> result.txt
           cd hw_vol
-          ./run.sh
+          ./run.sh >> ../result.txt
           cd ..
+
+      # Upload the results as an artifact
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-test-results
+          path: result.txt
+
