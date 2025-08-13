@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 WORKDIR /app
 
 # The `.` in the following line means `/app`
-COPY ../src .
+COPY ./src .
 
 # Compile these codes while building, the working directory is `/app`
 RUN apt-get update \
