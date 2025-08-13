@@ -1,0 +1,36 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make run.sh executable
+        run: |
+          chmod +x hw_copy/run.sh
+          chmod +x hw_vol/run.sh
+
+      # Test for hw_copy
+      - name: Build and Run hw_copy
+        run: |
+          echo "=== Testing hw_copy ==="
+          cd hw_copy
+          ./run.sh
+          cd ..
+
+      # Test for hw_vol
+      - name: Build and Run hw_vol
+        run: |
+          echo "=== Testing hw_vol ==="
+          cd hw_vol
+          ./run.sh
+          cd ..
